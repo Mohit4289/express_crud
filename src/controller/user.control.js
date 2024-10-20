@@ -39,6 +39,30 @@ export const signup = async (req,res) => {
     
 }
 
+export const login = async (req,res) => {
+    const {username, email, password} = await req.body
+
+    try {
+        const checkuser = await  User.findOne({email: email});
+
+        if(!checkuser){
+            return res.status(401).json({message: "user doesnt exist"})
+        }
+
+        const checkpass = await password === checkuser.password
+
+        if(!checkpass){
+            return res.status(401).json({message: "password is wrong"})
+        }
+
+        res.status(200).json({message: "sucessfully logined"})
+
+    } catch (error) {
+        console.log("data not posted code eror", error)
+        res.status(500).json({message: 'something went wrong'})
+    }
+}
+
 export const update = async (req,res) => {
     const {id} = await req.params
 
