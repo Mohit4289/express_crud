@@ -1,6 +1,7 @@
 import express from "express"
 import mongoose from 'mongoose'
 import userRouter from './routes/user.route.js'
+import cors from "cors";
 
  const app = express()
 
@@ -14,6 +15,6 @@ import userRouter from './routes/user.route.js'
  });
 
  app.use(express.json())
-
+ app.use(cors())
  app.use("/api", userRouter)
 
