@@ -10,7 +10,7 @@ function App() {
     axios.get("/api/users")
     .then((response) => {
       setDatabase(response.data.data);
-      console.log(response.data)
+      console.log(response.data.data)
     })
     .catch((error) => {
       console.log(error);
@@ -38,12 +38,23 @@ function App() {
             Login
           </Link>
         </button>
+        <button>
+          <Link to="/update" className="bg-blue-500 p-2 font-bold rounded-md">
+            Update
+          </Link>
+        </button>
+        <button>
+          <Link to="/delete" className="bg-blue-500 p-2 font-bold rounded-md">
+            Delete
+          </Link>
+        </button>
       </div>
       
       {database.length > 0 ? (
         <div>
           {database.map((base,index) => (
             <div key={base.id} className="p-3 border-b border-gray-300">
+              <h1>id: {base._id}</h1>
               <h1>Username: {base.username}</h1>
               <h1>Email: {base.email}</h1>
               <h1>Password: {base.password}</h1> 
